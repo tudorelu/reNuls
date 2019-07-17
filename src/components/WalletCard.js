@@ -10,7 +10,7 @@ import {
 
 import theme from '../theme';
 
-class CarouselCard extends Component {
+class WalletCard extends Component {
   render() {
     
     const {title, children} = this.props;
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
 	container: {
     //display:'flex',
     //height:'60%',
+    height: 250,
     width:theme.defaultContainerWidth-20,
     paddingBottom:30,
     alignSelf:'center'
@@ -58,4 +59,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default CarouselCard;
+export default WalletCard;

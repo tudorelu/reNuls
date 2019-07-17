@@ -18,6 +18,9 @@ import { Platform, StatusBar, StyleSheet, View, Text } from 'react-native';
 //import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './src/navigation/AppNavigator';
 import crypto from 'crypto'
+
+import WelcomeScreen from './src/screens/WelcomeScreen';
+
 // use crypto
 export default class App extends React.Component {
   state = {
@@ -54,8 +57,9 @@ export default class App extends React.Component {
       return (
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <Text> Shit Loaded </Text>
-          {/*<AppNavigator />*/}
+          {/*<Text> Shit Loaded </Text>*/}
+          {/*<WelcomeScreen />*/}
+          {<AppNavigator />}
         </View>
       );
     }
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    //alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   welcome: {

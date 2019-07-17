@@ -91,7 +91,6 @@ class SendScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-
   button: {
   	...theme.primaryButton,
   },

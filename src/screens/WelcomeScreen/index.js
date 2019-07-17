@@ -6,7 +6,7 @@ import {
 	Text,
 } from 'react-native';
 
-import PrimaryButton from '../../components/PrimaryButton'
+import PrimaryButton from '../../components/PrimaryButton';
 import theme from '../../theme';
 
 class WelcomeScreen extends Component {

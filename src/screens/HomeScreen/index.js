@@ -8,8 +8,7 @@ import Carousel from 'react-native-snap-carousel';
 import CarouselCard from '../../components/CarouselCard';
 import theme from '../../theme';
 
-//import '../../shim.js';
-//import * as NULS from 'nuls-js';
+import * as NULS from 'nuls-js';
 
 
 class HomeScreen extends Component {
@@ -17,22 +16,9 @@ class HomeScreen extends Component {
 	constructor(props) {
 	  super(props);
 
-    try {
-      console.log(NULS);
-    } catch {
-      console.log("No NULS")
-    }
-    try {
-      console.log(NULS.Account);
-      NULS.Account.create();
-    } catch (error){
-      console.log(error);
-      console.log("No NULS.Account")
-    }
+    const account = NULS.Account.create();
 
-    //var account = NULS.Account.create();
-
-    //console.log(account.address);
+    console.log(account);
 
 	  this.state = {
       walletData:{
@@ -116,12 +102,12 @@ class HomeScreen extends Component {
         {tx.type==="IN"
         ? <View style={styles.txIcon} >
             <Icon name='download' 
-            //type="feather" 
+            type="feather" 
             size={16} color="#99f"/>
           </View>
         : <View style={styles.txIcon} >
             <Icon name='upload' 
-            //type="feather" 
+            type="feather" 
             size={16} color="#99f"/>
           </View>
         }
@@ -165,6 +151,8 @@ class HomeScreen extends Component {
 	        renderItem={this._renderCarouselItem}
 	        sliderWidth={400}
 	        itemWidth={300}
+          sliderHeight={3000}
+          style={{height:1000}}
       	/>
 
       {/* Transaction History */}
@@ -183,7 +171,7 @@ class HomeScreen extends Component {
 	      	<TouchableOpacity onPress={() => this.props.navigation.navigate("Send")}> 
 	      		<View style={styles.avatar} >
 	          	<Icon name='upload' 
-              //type="feather" 
+              type="feather" 
               size={20} color="#99f"/>
 	          </View>
 	      	</TouchableOpacity>
@@ -191,7 +179,7 @@ class HomeScreen extends Component {
 	      	<TouchableOpacity onPress={() => this.props.navigation.navigate("Receive")}>
 	      		<View style={styles.avatar} >
 	          	<Icon name='download' 
-              //type="feather" 
+              type="feather" 
               size={20} color="#99f"/>
 	        	</View>
 	        </TouchableOpacity>
@@ -199,7 +187,7 @@ class HomeScreen extends Component {
 	      	<TouchableOpacity onPress={() => this.props.navigation.navigate("CreateWallet")}> 
 	      		<View style={styles.avatar} >
 	          	<Icon name='plus' 
-              //type="feather" 
+              type="feather" 
               size={20} color="#99f"/>
 	          </View>
 	      	</TouchableOpacity>
