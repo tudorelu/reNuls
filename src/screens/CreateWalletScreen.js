@@ -92,12 +92,12 @@ class CreateWalletScreen extends Component {
 		    contents.push(<PrimaryButton key={4} title="Create New Wallet" onPress={() => this._createWallet()}/>);
 		    break;
 		  case 'private-key':
-				contents.push(<InputField key={0} label="Private Key"/>);
+				contents.push(<InputField key={0} label="Private Key" onChangeText={(value)=>{  }} />);
 		    contents.push(<PrimaryButton key={4} title="Create Wallet" onPress={() => console.log("Create Wallet")}/>);
 		    break;
-		  case 'encrypted-key':
-				contents.push(<InputField key={0} label="Encryted Key"/>);
-				contents.push(<InputField key={1} label="Passphrase" carretHidden/>);
+		  case 'keystore-file':
+				contents.push(<InputField key={0} label="Keystore File"/>);
+				// contents.push(<InputField key={1} label="Passphrase" carretHidden/>);
 		    contents.push(<PrimaryButton key={4} title="Create Wallet" onPress={() => console.log("Create Wallet")}/>);
 		    break;
 		  default:
@@ -120,7 +120,7 @@ class CreateWalletScreen extends Component {
 					  onValueChange={(itemValue, itemIndex) => this.setState({walletType: itemValue})}>
 					  <Picker.Item label="Create New Wallet" value="new-wallet" />
 					  <Picker.Item label="Import Private Key" value="private-key" />
-					  <Picker.Item label="Import Encrypted Key" value="encrypted-key" />
+					  <Picker.Item label="Import Keystore File" value="keystore-file" />
 					</Picker>
 					{<Icon type="entypo" name="select-arrows" color={"white"} size={13} style={styles.icon}/>}
 				</View>

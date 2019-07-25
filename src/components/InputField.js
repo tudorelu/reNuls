@@ -23,7 +23,7 @@ export default class InputField extends React.Component {
           : []
           }
         </View>
-    		</View>
+  		</View>
     );
   }
 }
@@ -31,7 +31,7 @@ export default class InputField extends React.Component {
 const styles = StyleSheet.create({
   root: {
     alignSelf:'center',
-  	width:theme.defaultContainerWidth,
+  	width: theme.defaultContainerWidth,
   },
   label: {
   	...theme.inputFieldLabel,
