@@ -16,45 +16,100 @@ class WalletCard extends Component {
     const {title, children} = this.props;
 
     return (
-    	<View style={styles.container}>
-    		<View style={styles.title}>
+      <View style={styles.content}>
+        {/*<View style={styles.title}>
           <Text style={styles.titleText}>{title}</Text>
-    		</View>
-    		<View style={styles.content}>
-          <Text style={styles.contentText}>{children}</Text>
-    		</View>
-    	</View>
+        </View>*/}
+        <Text style={styles.xlargeText}> Wallet Name </Text>
+        <Text style={styles.smallText}> Nse3uLgeCBWP48GCGh8L54gnELfpnSG9 </Text>
+        <Text style={styles.largeText}> $ 98,892 </Text>
+        <View style={styles.line} />
+        <View style={styles.bottomContent}>
+
+          <View style={styles.bottomTab}>
+            <Text style={styles.smallText}> Total </Text>
+            <Text style={styles.midText}> 108,374.75 </Text>
+
+          </View>
+          <View style={styles.bottomTab}>
+            <Text style={styles.smallText}> N Available </Text>
+            <Text style={styles.midText}> 100,000 </Text>
+
+          </View>
+          <View style={styles.bottomTab}>
+            <Text style={styles.smallText}> Locked </Text>
+            <Text style={styles.midText}> 8,374.75 </Text>
+
+          </View>
+        </View>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-	container: {
-    //display:'flex',
-    //height:'60%',
-    height: 250,
-    width:theme.defaultContainerWidth-20,
-    paddingBottom:30,
-    alignSelf:'center'
-	},
-	title: {
-		backgroundColor: theme.palette.primary.main,
-	},
+  content: {
+    marginBottom:10,
+    borderRadius:10,
+    display:'flex',
+    height:180,
+    flexDirection:'column',
+    backgroundColor: theme.palette.primary.midDark,
+  },
+  title: {
+    backgroundColor: theme.palette.primary.main,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
   titleText: {
     color:'white',
     margin:5,
     marginLeft:10,
     fontSize: 14,
   },
-	content: {
+  bottomContent:{
+    flexDirection:'row',
     display:'flex',
-    backgroundColor: theme.palette.primary.midDark,
   },
-  contentText: {
+  bottomTab:{
+    flexDirection:'column',
+    flex: 1,
+  },
+  xlargeText: {
     ...theme.text,
+    textAlign: 'left',
     //backgroundColor:'pink',
-    fontSize: 32,
+    fontSize: 22,
+    fontWeight: 'bold',
+    margin:4,
+  },
+  largeText: {
+    ...theme.text,
+    textAlign: 'left',
+    //backgroundColor:'pink',
+    fontSize: 18,
+    fontWeight: 'bold',
+    margin:1,
+  },
+  smallText: {
+    ...theme.text,
+    textAlign: 'left',
+    //backgroundColor:'pink',
+    fontSize: 11,
+    //margin:1,
+  },
+  midText: {
+    ...theme.text,
+    textAlign: 'left',
+    //backgroundColor:'pink',
+    fontSize: 14,
+    margin:1,
+  },
+  line:{
+    height:0,
     margin:10,
+    borderColor:'white',
+    borderWidth: 1,
   }
 });
 

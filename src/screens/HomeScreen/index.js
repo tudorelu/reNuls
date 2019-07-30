@@ -6,7 +6,13 @@ import { StyleSheet, View, TouchableOpacity, Platform, Image, ScrollView, FlatLi
 
 import Carousel from 'react-native-snap-carousel';
 import CarouselCard from '../../components/CarouselCard';
+import WalletCard from '../../components/WalletCard';
+
+import SweetCarousel from '../../components/SweetCarousel';
+
 import theme from '../../theme';
+
+import { FloatingAction } from "react-native-floating-action";
 
 import * as NULS from 'nuls-js';
 
@@ -16,9 +22,9 @@ class HomeScreen extends Component {
 	constructor(props) {
 	  super(props);
 
-    const account = NULS.Account.create();
+    // const account = NULS.Account.create();
 
-    console.log(account);
+    // console.log(account);
 
 	  this.state = {
       walletData:{
@@ -86,13 +92,14 @@ class HomeScreen extends Component {
 
   _renderCarouselItem ({item}) {
     return (
-    	<CarouselCard title={item.title}> {item.text} </CarouselCard>
+    	<WalletCard title={item.title}> {item.text} </WalletCard>
     );
   }
 
   _renderTx (item) {
 
     let tx = item.item
+    let hash = tx.hash
     let index = item.index
     var fr = tx.from + ""
     var tt = tx.to + ""
@@ -112,20 +119,23 @@ class HomeScreen extends Component {
           </View>
         }
         <View style={{flexDirection:'column'}}>
-          <Text style={[styles.txItemElement, {fontWeight:'bold', fontSize: 17}]}> {date} </Text>
+          <Text style={[styles.txItemElement, {fontWeight:'bold', fontSize: 14}]}> {hash.substring(0,13)+"..."} </Text>
           {
             tx.type==="IN"
             ?<Text style={[styles.txItemElement]}> 
-              from {fr.substring(0,8)+"..."} 
+              from: {fr.substring(0,12)+"..."} 
             </Text>
             :<Text style={[styles.txItemElement]}> 
-              to {tt.substring(0,8)+"..."} 
+              to: {tt.substring(0,14)+"..."} 
             </Text>
           }
         </View>
         
         {/*<Text style={styles.txItemElement}> {tx.type === "IN"?"    IN":tx.type} </Text>*/}
-        <Text style={[styles.txItemElement, {marginLeft:30, fontSize:15}, tx.value > 0?{color:theme.palette.green.main}:{color:theme.palette.red.main}]}> {tx.value} </Text>
+        <View style={{flexDirection:'column', alignSelf:'flex-end'}}>
+          <Text style={[styles.txItemElement, {marginLeft:10, fontSize:15, alignSelf:'flex-end', textAlign:'right'}, tx.value > 0?{color:theme.palette.green.main}:{color:theme.palette.red.main}]}> {tx.value} </Text>
+          <Text style={[styles.txItemElement, {fontSize: 12}]}> {date} </Text>
+        </View>
       </View>); 
   }
 
@@ -141,6 +151,32 @@ class HomeScreen extends Component {
   }
 
   render() {
+    const fabActions = [
+    {
+      text: "Send",
+      icon: <Icon name='upload' 
+              type="feather" 
+              size={20} color="#fff"/>,
+      name: "Send",
+      position: 2
+    },
+    {
+      text: "Receive",
+      icon:  <Icon name='download' 
+              type="feather" 
+              size={20} color="#fff"/>,
+      name: "Receive",
+      position: 1
+    },
+    {
+      text: "Create Wallet",
+      icon:  <Icon name='plus' 
+              type="feather" 
+              size={20} color="#fff"/>,
+      name: "CreateWallet",
+      position: 3
+    },
+  ];
     return (
       <View style={styles.root}>
 
@@ -151,9 +187,11 @@ class HomeScreen extends Component {
 	        renderItem={this._renderCarouselItem}
 	        sliderWidth={400}
 	        itemWidth={300}
-          sliderHeight={3000}
-          style={{height:1000}}
+          //itemHeight={400}
+          //sliderHeight={3000}
       	/>
+
+        {/*<SweetCarousel />*/}
 
       {/* Transaction History */}
         <ScrollView style={styles.txListContainer}>
@@ -166,8 +204,15 @@ class HomeScreen extends Component {
           </FlatList>
         </ScrollView>
 
+        <FloatingAction
+          actions={fabActions}
+          onPressItem={name => {
+            this.props.navigation.navigate(name);// console.log(`selected button: ${name}`);
+          }}
+        />
+
       {/* Bottom Nav */}  
-      	<View style={styles.bottomButtons}>
+{/*      	<View style={styles.bottomButtons}>
 	      	<TouchableOpacity onPress={() => this.props.navigation.navigate("Send")}> 
 	      		<View style={styles.avatar} >
 	          	<Icon name='upload' 
@@ -191,7 +236,7 @@ class HomeScreen extends Component {
               size={20} color="#99f"/>
 	          </View>
 	      	</TouchableOpacity>
-      	</View>
+      	</View>*/}
       </View>
     );
   }
@@ -227,7 +272,7 @@ const styles = StyleSheet.create({
   },
   logo: {
 		...theme.headerImage,
-		backgroundColor:'white',
+		backgroundColor:'transparent',
 		borderRadius:100,
 		width:40,
 		height:40,
@@ -235,17 +280,18 @@ const styles = StyleSheet.create({
 		marginRight: "auto"
   },
   txListContainer:{
-    width:'99%'//theme.defaultContainerWidth,
+    marginTop:5,
+    width:'95%'//theme.defaultContainerWidth,
   },
   txListItem:{
     flexDirection:'row',
-    height:60, 
+    height:50, 
   },
   txItemElement:{
     ...theme.text,
     fontWeight: 'normal',
     fontSize: 12,
-    marginRight: 5,
+    //marginRight: 5,
   }
 });
 

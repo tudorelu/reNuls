@@ -9,6 +9,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import { TransferTransaction, nulsToNa, TransactionReceipt, TransactionConfig, Utxo, UTXO } from 'nuls-js';
 
 import GenericScreen from '../components/GenericScreen'
 import PrimaryButton from '../components/PrimaryButton'
@@ -59,6 +60,45 @@ class SendScreen extends Component {
 		this.state = {address:'', amount:'', note:''};
 	}
 
+  async sendNuls(){
+
+    console.log("Sending some NULS ... ");
+
+    const fromAddress = 'TTatokAfGRC6ACmqaoXqWniAEwqSvzrc';
+    const privateKey = '040b12fa6405badc1328904f05ef45e89e0606cfe4f03cd5f97bf20a04611c74';
+    const toAddress = 'TTaisi5BDnwooxFZg5D8vLktSuSrHtpS';
+    const anotherAddress = 'TTattJmAz28RNH95VsRqnGNRhvKAV5Fj';
+
+    const transactionConfig = {
+      api: {
+        host: 'https://explorer.nuls.services'
+      }
+    };
+
+    const utxos = await Utxo.getUtxos(fromAddress, transactionConfig.api);
+
+    console.log("Got utxos: ");
+    console.log(utxos);
+
+    const tx = TransferTransaction
+      .fromUtxos(utxos)
+      .config(transactionConfig)
+      .change(fromAddress)
+      .to(toAddress, nulsToNa(1.7))
+      .to(anotherAddress, nulsToNa(7))
+      .remark('test transfer :)')
+      .sign(privateKey);
+
+    console.log(tx.getType());
+    // 2
+
+    const txReceipt = await tx.send();
+
+    console.log("Got receipt: ");
+    console.log(txReceipt);
+
+  }
+
   render() {
     return (
     	<GenericScreen title="Send Funds" avatar="upload">
@@ -83,7 +123,7 @@ class SendScreen extends Component {
       		value={this.state.note}
     		/>
 
-  			<PrimaryButton title="Send" onPress={() => console.log("Send Pressed")} />
+  			<PrimaryButton title="Send" onPress={() => this.sendNuls()} />
 
     	</GenericScreen>
     );

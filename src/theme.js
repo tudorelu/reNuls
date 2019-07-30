@@ -134,7 +134,7 @@ const theme = {
     fontSize: 16,
     //fontWeight: 'bold',
     textAlign: 'center',
-    alignSelf:'center',
+    //alignSelf:'center',
     padding: 5,
   },
   secondaryButton: {
