@@ -1,18 +1,3 @@
-
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
-
- NOTE TO SELF:
-
- YOU SUCCESFULLY MANAGED TO RUN crypto module on IOS!
-
- NEXT, TRY AND ADD, ONE BY ONE THE PAGES IN THE NULS MOBILE WALLET
- 
- */
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View, Text } from 'react-native';
 //import { AppLoading, Asset, Font, Icon } from 'expo';
@@ -20,6 +5,17 @@ import AppNavigator from './src/navigation/AppNavigator';
 import crypto from 'crypto'
 
 import WelcomeScreen from './src/screens/WelcomeScreen';
+
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
+import AuthReducer from './src/reducers/Auth';
+
+const rootReducer = (state = {}, action) => {
+  return state
+}
+
+const store = createStore(AuthReducer)
 
 // use crypto
 export default class App extends React.Component {
@@ -29,7 +25,6 @@ export default class App extends React.Component {
 
   constructor(props){
     super(props);
-
     console.log(crypto.randomBytes(32).toString('hex'));
   
   }
@@ -55,16 +50,16 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          {/*<Text> Shit Loaded </Text>*/}
-          {/*<WelcomeScreen />*/}
-          {<AppNavigator />}
-        </View>
+        <Provider store={ store }>
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+
+            {<AppNavigator />}
+          </View>
+        </Provider>
       );
     }
   }
-
   _handleLoadingError = error => {
     // In this case, you might want to report the error to your error
     // reporting service, for example Sentry

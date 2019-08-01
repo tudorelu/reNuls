@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 import {
   StyleSheet,
+  Image,
   View,
   Text
 } from 'react-native';
@@ -13,7 +14,6 @@ import theme from '../theme';
 class SplashScreen extends Component {
 
   componentDidMount(){
-    
     setTimeout(function() { //Start the timer
       this.props.navigation.navigate('AuthNavigator');
     }.bind(this), 3000)
@@ -22,7 +22,14 @@ class SplashScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}> NULS Splash Screen ... </Text>
+        <View style={styles.logo} >
+          <Image
+            source={require('../assets/images/Nuls.jpg')}
+            style={{ resizeMode:'center'}}
+          />
+        </View>
+        <Text style={styles.title}> reNuls </Text>
+        <Text style={styles.footer}> Built by Angel and Tudor </Text>
       </View>
     );
   }
@@ -34,8 +41,23 @@ const styles = StyleSheet.create({
   },
   title:{
     ...theme.title,
+    padding:50,
+    fontWeight:'bold',
+    fontSize:30,
     color:'white'
-  }
+  },
+  footer:{
+    ...theme.subtitle,
+    paddingTop:50,
+    justifyContent:'flex-end',
+    color:'white'
+  },
+  logo: {
+    ...theme.headerImage,
+    backgroundColor:'transparent',
+    borderRadius:100,
+    height:300,
+  },
 });
 
 

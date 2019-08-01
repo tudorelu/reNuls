@@ -113,7 +113,7 @@ const theme = {
   title: {
     //fontFamily: "Neuzeit Grotesk",
     color: '#FFFFFF',
-    fontSize: 24,
+    fontSize: 28,
     //fontWeight: 'bold',
     textAlign: 'center',
     alignSelf:'center',
@@ -122,11 +122,11 @@ const theme = {
   subtitle: {
     //fontFamily: "Neuzeit Grotesk",
     color: '#FFFFFF',
-    fontSize: 20,
+    fontSize: 16,
     //fontWeight: 'bold',
     textAlign: 'center',
     alignSelf:'center',
-    padding: 5,
+    padding: 3,
   },
   text: {
     //fontFamily: "Neuzeit Grotesk",
@@ -170,7 +170,7 @@ const theme = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems:'center', 
-    backgroundColor: '#3D6EDE',
+    backgroundColor: '#8D9EED',
   },
 };
 
