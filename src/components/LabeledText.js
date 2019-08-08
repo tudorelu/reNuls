@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
   },
   text: {
   	...theme.text,
+    marginLeft: -10,
+    marginRight: -10,
+    marginTop:0,
     textAlign:'left',
   }
 });

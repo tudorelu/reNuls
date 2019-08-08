@@ -11,7 +11,9 @@ import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 import PrimaryButton from '../components/PrimaryButton';
 import theme from '../theme';
 
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { setPin } from '../actions/Auth';
 
 class ConfirmPinScreen extends Component {
 
@@ -64,7 +66,7 @@ class ConfirmPinScreen extends Component {
   }
 
   _checkCode = (pinCode) => {
-    if(this.props.auth.pin == pinCode){
+    if(this.props.auth.auth.pin == pinCode){
       this.props.navigation.navigate('App');
     } else {
       this.pinInput.current.shake()
@@ -97,4 +99,10 @@ const mapStateToProps = (state) => {
   return { auth }
 };
 
-export default connect(mapStateToProps)(ConfirmPinScreen);
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    setPin,
+  }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConfirmPinScreen);

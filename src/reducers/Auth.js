@@ -1,11 +1,8 @@
 import { combineReducers } from 'redux';
 
 const INITIAL_STATE = {
-  something:{
-    Andale: 2
-  },
   auth:{
-    pin: "222222",
+    pin: '',
   }
 };
 

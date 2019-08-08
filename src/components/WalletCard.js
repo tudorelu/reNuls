@@ -12,16 +12,16 @@ import theme from '../theme';
 
 class WalletCard extends Component {
   render() {
+    console.log("Wallet is ");
+    console.log(this.props.wallet);
     
-    const {title, children} = this.props;
-
     return (
       <View style={styles.content}>
         {/*<View style={styles.title}>
           <Text style={styles.titleText}>{title}</Text>
         </View>*/}
         <Text style={styles.xlargeText}> Wallet Name </Text>
-        <Text style={styles.smallText}> Nse3uLgeCBWP48GCGh8L54gnELfpnSG9 </Text>
+        <Text style={styles.smallText}> {this.props.wallet.address} </Text>
         <Text style={styles.largeText}> $ 98,892 </Text>
         <View style={styles.line} />
         <View style={styles.bottomContent}>

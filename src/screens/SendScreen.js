@@ -71,7 +71,7 @@ class SendScreen extends Component {
 
     const transactionConfig = {
       api: {
-        host: 'https://explorer.nuls.services'
+        host: 'https://nuls.world'
       }
     };
 

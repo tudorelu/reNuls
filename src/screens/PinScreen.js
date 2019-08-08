@@ -3,23 +3,26 @@
 import React, { Component } from 'react';
 
 import {
+  TouchableOpacity,
   StyleSheet,
   View,
   Text
 } from 'react-native';
 
+import { connect } from 'react-redux';
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
+
 import PrimaryButton from '../components/PrimaryButton';
 import theme from '../theme';
 
-import { connect } from 'react-redux';
 
 class PinScreen extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      code: ""
+      code: '',
+      showForgotButton:false,
     }
   }
   
@@ -29,9 +32,11 @@ class PinScreen extends Component {
     return (
       <View style={styles.container}>
 	      <Text style={styles.title}>
-	      	To Access Your Wallet Please Enter Your Pin Code. (222222)
+         Enter Your Pin Code.
 	      </Text>
-	      <Text style={styles.subtitle}> This code will be used to approve important actions </Text>
+	      <Text style={styles.subtitle}> 
+        We'll ask this code to approve important actions.
+        </Text>
 
         <SmoothPinCodeInput
           ref={this.pinInput}
@@ -50,16 +55,24 @@ class PinScreen extends Component {
           />
 	      
         {/*<PrimaryButton title="DONE" onPress={() => this.props.navigation.navigate('App')} />*/}
-
+        {this.state.showForgotButton?
+          <TouchableOpacity onClick={()=>console.log("U'RE RECKD... Unless you have the seed phrase. ")}>
+            <Text style={styles.textButton}> 
+              Forgot Your PIN ?
+            </Text>
+          </TouchableOpacity>:undefined}
       </View>
     );
   }
+
   _checkCode = (pinCode) => {
-    if(this.props.auth.pin == pinCode){
+    if(this.props.auth.auth.pin == pinCode){
       this.props.navigation.navigate('App');
     } else {
       this.pinInput.current.shake()
-        .then(() => this.setState({ code: '' }));
+        .then(() => {
+          this.setState({ code: '', showForgotButton:true })
+        });
     }
   }
 }
@@ -74,6 +87,11 @@ const styles = StyleSheet.create({
   },
   subtitle:{
     ...theme.subtitle,
+    color:'#ddd'
+  },
+  textButton:{
+    ...theme.subtitle,
+    marginTop:20,
     color:'#ddd'
   }
 });

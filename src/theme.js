@@ -131,7 +131,7 @@ const theme = {
   text: {
     //fontFamily: "Neuzeit Grotesk",
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: 14,
     //fontWeight: 'bold',
     textAlign: 'center',
     //alignSelf:'center',
