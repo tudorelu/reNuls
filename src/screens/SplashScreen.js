@@ -29,7 +29,7 @@ class SplashScreen extends Component {
           />
         </View>
         <Text style={styles.title}> reNuls </Text>
-        <Text style={styles.footer}> Built by Angel and Tudor </Text>
+        <Text style={styles.footer}> Built by Tudor Barbulescu </Text>
       </View>
     );
   }

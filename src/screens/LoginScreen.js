@@ -18,7 +18,9 @@ class LoginScreen extends Component {
       <View style={styles.container}>
       	<Text style={styles.title}> Choose Account </Text>
         
-        <PrimaryButton title="Login" onPress={() => this.props.navigation.navigate('Pin')} />
+        <PrimaryButton title="Login" onPress={() => this.props.navigation.navigate('Pin', {
+              nextPage: 'App',
+            })} />
       </View>
     );
   }

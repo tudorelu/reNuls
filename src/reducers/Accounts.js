@@ -14,7 +14,10 @@ const accountsReducer = (state = INITIAL_STATE, action) => {
       // Pulls current and possible out of previous state
       // We do not want to alter state directly in case
       // another action is altering it at the same time
-      let wallets = state.accounts.wallets.slice(0);
+      let wallets = [];
+
+      if(state.accounts.wallets !== null && state.accounts.wallets !== undefined)
+        wallets = state.accounts.wallets.slice(0);
 
       console.log("OLD STATE: ", state);
 
@@ -25,13 +28,19 @@ const accountsReducer = (state = INITIAL_STATE, action) => {
       return { ...state, accounts:{wallets} };
 
     case 'DELETE_WALLET':
-      
-      accounts.wallets = accounts.wallets.slice(0).filter((wallet) => {
-        return wallet.address !== action.payload
-      });
-      console.log("NEW STATE: ", { ...state, accounts });
 
-      return { ...state, accounts };
+      console.log("OLD STATE: ", { ...state });
+
+      let newWallets = [];
+
+      if(state.accounts.wallets !== null && state.accounts.wallets !== undefined)
+        newWallets = state.accounts.wallets.slice(0).filter((wallet) => {
+          return wallet.address !== action.payload
+        }).slice(0);
+
+      console.log("NEW STATE: ", { ...state,  accounts:{newWallets} });
+
+      return { ...state,  accounts:{newWallets}  };
 
     default:
       return state

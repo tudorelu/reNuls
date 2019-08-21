@@ -8,7 +8,13 @@ import {
   Text
 } from 'react-native';
 
+import { Icon } from 'react-native-elements';
+
 import theme from '../theme';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { deleteWallet } from '../actions/Accounts';
 
 class WalletCard extends Component {
   render() {
@@ -20,7 +26,19 @@ class WalletCard extends Component {
         {/*<View style={styles.title}>
           <Text style={styles.titleText}>{title}</Text>
         </View>*/}
-        <Text style={styles.xlargeText}> Wallet Name </Text>
+
+        <View style={styles.topContent}>
+          <Text style={styles.xlargeText}> Wallet Name </Text>
+          <Icon
+            style={styles.iconButton}
+            name='more-vertical'
+            type='feather'
+            color='#fff'
+            onPress={() => { 
+              console.log("Lalalalala");
+              //this.props.deleteWallet(this.props.wallet.address);
+            }} />
+        </View>
         <Text style={styles.smallText}> {this.props.wallet.address} </Text>
         <Text style={styles.largeText}> $ 98,892 </Text>
         <View style={styles.line} />
@@ -39,7 +57,6 @@ class WalletCard extends Component {
           <View style={styles.bottomTab}>
             <Text style={styles.smallText}> Locked </Text>
             <Text style={styles.midText}> 8,374.75 </Text>
-
           </View>
         </View>
       </View>
@@ -61,6 +78,15 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
+   iconButton: {
+    //...StyleSheet.absoluteFillObject,
+    alignSelf: 'flex-end',
+    width:30,
+    height: 30,    
+    // top: 20,
+    // right: 5,
+    //position: 'absolute', // add if dont work with above
+  },
   titleText: {
     color:'white',
     margin:5,
@@ -68,6 +94,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   bottomContent:{
+    flexDirection:'row',
+    display:'flex',
+  },
+  topContent:{
     flexDirection:'row',
     display:'flex',
   },
@@ -113,5 +143,15 @@ const styles = StyleSheet.create({
   }
 });
 
+const mapStateToProps = (state) => {
+  const { accounts } = state.accounts
+  return { accounts }
+};
 
-export default WalletCard;
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    deleteWallet,
+  }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(WalletCard);

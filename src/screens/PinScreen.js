@@ -23,6 +23,7 @@ class PinScreen extends Component {
     this.state = {
       code: '',
       showForgotButton:false,
+      nextPage: this.props.navigation.getParam('nextPage', 'App'),
     }
   }
   
@@ -32,10 +33,10 @@ class PinScreen extends Component {
     return (
       <View style={styles.container}>
 	      <Text style={styles.title}>
-         Enter Your Pin Code.
+         First, Enter Your Pin Code.
 	      </Text>
 	      <Text style={styles.subtitle}> 
-        We'll ask this code to approve important actions.
+         We'll ask this code to approve important actions.
         </Text>
 
         <SmoothPinCodeInput
@@ -67,7 +68,7 @@ class PinScreen extends Component {
 
   _checkCode = (pinCode) => {
     if(this.props.auth.auth.pin == pinCode){
-      this.props.navigation.navigate('App');
+      this.props.navigation.navigate(this.state.nextPage);
     } else {
       this.pinInput.current.shake()
         .then(() => {

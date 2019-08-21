@@ -11,6 +11,8 @@ import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 import PrimaryButton from '../components/PrimaryButton';
 import theme from '../theme';
 
+import { Icon } from 'react-native-elements';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setPin } from '../actions/Auth';
@@ -20,13 +22,28 @@ class ConfirmPinScreen extends Component {
   constructor(props){
     super(props);
     this.state = {
-      code: ""
+      code: "",
+      wasSet: false
     }
   }
   
   pinInput = React.createRef();
 
   render() {
+    if(this.state.wasSet){
+   return (
+        <View style={styles.container}>
+          <Text style={styles.title}>
+            Your PIN Code was changed!
+          </Text>
+          <Icon
+            size={140}
+            name='check'
+            type='feather'
+            color='#fff' />
+        </View>
+      )
+    } else
     return (
       <View style={styles.container}>
 	      <Text style={styles.title}>
@@ -67,7 +84,11 @@ class ConfirmPinScreen extends Component {
 
   _checkCode = (pinCode) => {
     if(this.props.auth.auth.pin == pinCode){
-      this.props.navigation.navigate('App');
+      this.setState({'wasSet':true});
+
+      setTimeout(function() { //Start the timer
+        this.props.navigation.navigate('App');
+      }.bind(this), 3000)
     } else {
       this.pinInput.current.shake()
         .then(() => this.setState({ code: '' }));

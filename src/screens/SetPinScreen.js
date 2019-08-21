@@ -28,7 +28,7 @@ class SetPinScreen extends Component {
       <View style={styles.container}>
 
 	      <Text style={styles.title}>
-	        To Enable Your Wallet, Enter a 4 digit code.
+	        Enter a new 6 digit code.
 	      </Text>
 
         <Text style={styles.subtitle}> 

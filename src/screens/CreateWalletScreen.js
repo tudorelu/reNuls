@@ -90,6 +90,7 @@ class CreateWalletScreen extends Component {
 		let wallet = NULS.Account.create();
 		this.props.createWallet(wallet);
 		this.setState({wallet});
+		this.props.navigation.navigate('App');
 	};
 
 	// _createEncryptedWallet = (password) => {

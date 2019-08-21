@@ -1,6 +1,6 @@
 import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import { Platform, Dimensions } from 'react-native';
+import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
 
 import HomeScreen from '../screens/HomeScreen';
 
@@ -8,6 +8,7 @@ import ReceiveScreen from '../screens/ReceiveScreen';
 import CreateWalletScreen from '../screens/CreateWalletScreen';
 import SendScreen from '../screens/SendScreen';
 
+import SideMenu from '../components/SideMenu';
 
 const MainStackNavigator = createStackNavigator({
   Home: HomeScreen,
@@ -20,4 +21,16 @@ MainStackNavigator.navigationOptions = {
   header: null
 }
 
-export default MainStackNavigator;
+
+const DrawerNav = createDrawerNavigator({
+  Item1: {
+      screen: MainStackNavigator,
+    }
+  }, {
+    contentComponent: SideMenu,
+    drawerWidth: Dimensions.get('window').width - 120,  
+});
+
+
+
+export default DrawerNav;
